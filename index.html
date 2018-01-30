@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="assets/css/reset.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+  	
+	<title>Side Cart</title>
+</head>
+<body>
+	<header>
+		<div id="cd-hamburger-menu"><a class="cd-img-replace" href="#0">Menu</a></div>
+	</header>
+
+	<nav id="main-nav"></nav>
+	<div id="cd-shadow-layer"></div>
+
+	<script type="text/javascript">
+		var menuHamburguer = function(){
+			var init = function(){
+				requestAjax();
+				eventClickMenu();
+			};
+			var requestAjax = function () {
+				var data = null;
+				var xhr = new XMLHttpRequest();
+
+				xhr.withCredentials = true;
+
+				xhr.addEventListener("readystatechange", function () {
+					if (this.readyState === 4) {
+						drawMenu(this.responseText);
+					}
+				});
+
+				xhr.open("GET", "http://localhost:9000/menu");
+				xhr.send(data);
+			};
+
+			var drawMenu = function (menuObj) {
+				var menuHtml = '';
+				var menuObj = JSON.parse(menuObj);
+				var ul = document.getElementById("main-nav");
+				
+				menuHtml += '<ul>';
+				menuObj.forEach(function(menu){
+					menuHtml += '<li>';
+					menuHtml += 	'<a href="'+menu.url+'">'+menu.name+'</a>';
+					if (menu.submenu) {
+						var hasSub = true; 
+					}
+					menuHtml += '</li>';
+
+				});
+				menuHtml += '</ul>';
+
+				ul.innerHTML = menuHtml;
+			};
+
+			var eventClickMenu = function () {
+				document.getElementById('cd-hamburger-menu').addEventListener("click", function(e){
+					e.preventDefault();
+					document.getElementsByTagName('body')[0].classList.toggle('overflow-hidden');
+					document.getElementById('main-nav').classList.toggle('speed-in');
+					document.getElementById('cd-shadow-layer').classList.toggle('is-visible');
+				});
+			};
+			return {init:init};
+		}();
+
+		menuHamburguer.init();
+	</script>
+</body>
+</html>

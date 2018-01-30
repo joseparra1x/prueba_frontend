@@ -1,0 +1,27 @@
+{
+  "name"        : "prueba_comparamejor",
+  "version"     : "1.0.0",
+  "description" : "Prueba cantidatos frontend comparamejor",
+  "main"        : "index.js",
+  "scripts": {
+    "server": "json-server ./public/assets/api/data.json --port 9000"
+  },
+  "author"  : "Sebastián Plazas<sebasplazas@gmail.com>",
+  "license" : "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "browser-sync"      : "^2.18.13",
+    "gulp"              : "^3.9.1",
+    "gulp-load-plugins" : "^1.5.0",
+    "gulp-minify-css"   : "^1.2.4",
+    "gulp-sourcemaps"   : "^2.6.1",
+    "gulp-uglify"       : "^3.0.0",
+    "gulp-usemin"       : "^0.3.28",
+    "gulp-util"         : "^3.0.8",
+    "gulp-watch"        : "^4.3.11"
+  },
+  "dependencies": {
+    "json-server" : "^0.12.1"
+  }
+}
